@@ -1,0 +1,43 @@
+import java.rmi.Naming;
+import java.util.List;
+
+public class RecadoClient
+{
+    public static void main(String arg[])
+    {
+        try
+        {
+           IMural mural = (IMural) Naming.lookup("//localhost:2020/Mural"); //objectname in registry
+           
+           Recado r = new Recado();
+           r.setCodigo(1);
+           r.setTexto("Oi, preciso falar com você. Me liga.");
+           r.setNome("Herbeth");
+           mural.registrarRecado(r);
+           
+           Recado r2 = new Recado();
+           r2.setCodigo(2);
+           r2.setTexto("Estou em reunião, não posso atender agora.");
+           r2.setNome("Albuquerque");
+           mural.registrarRecado(r2);
+           
+           Recado r3 = new Recado();
+           r3.setCodigo(3);
+           r3.setTexto("Teste");
+           r3.setNome("Abreu");
+           mural.registrarRecado(r3);
+           
+           mural.removerRecado(r2);
+           
+           List<Recado> recados = mural.consultarRecados();
+           for(Recado rec : recados) {
+        	   System.out.println(rec.getNome() + ": " + rec.getTexto());
+           }
+        }
+        catch (Exception e)
+        {
+           System.out.println("HelloClient exception: " + e.getMessage());
+           e.printStackTrace();
+        }
+    }
+}

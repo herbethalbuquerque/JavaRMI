@@ -1,0 +1,40 @@
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AgendaImpl extends UnicastRemoteObject implements IAgenda
+{
+	private static final long serialVersionUID = 1L;
+
+	public AgendaImpl() throws RemoteException {
+		contatos = new ArrayList<>();
+	}
+
+	private ArrayList<Contato> contatos;
+	
+	@Override
+	public void registrarContato(Contato contato) throws RemoteException {
+		Contato c = consultarContato(contato.getCodigo());
+		if (c == null)
+			contatos.add(contato);
+		else{
+			c.setFone(contato.getFone());
+			c.setNome(contato.getNome());
+		}
+	}
+
+	@Override
+	public Contato consultarContato(int codigo) throws RemoteException {
+		for(Contato c : contatos){
+			if (c.getCodigo() == codigo)
+				return c;
+		}
+		return null;
+	}
+
+	@Override
+	public List<Contato> consultarContatos() throws RemoteException {
+		return contatos;
+	}
+} 

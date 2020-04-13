@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;AgendaClient&apos; to &apos;RecadoClient&apos;&#x0D;&#x0A;- Original project: &apos;RMIClient&apos;&#x0D;&#x0A;- Original element: &apos;AgendaClient&apos;&#x0D;&#x0A;- Renamed element: &apos;RecadoClient&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;AgendaClient&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{AgendaClient.java[AgendaClient" matchStrategy="1" name="RecadoClient" qualified="false" references="true" similarDeclarations="false" stamp="1586809389409" textual="false" version="1.0"/>
+</session>

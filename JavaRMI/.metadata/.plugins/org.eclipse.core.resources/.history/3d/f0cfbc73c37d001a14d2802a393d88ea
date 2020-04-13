@@ -1,0 +1,40 @@
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MuralImpl extends UnicastRemoteObject implements IMural
+{
+	private static final long serialVersionUID = 1L;
+
+	public MuralImpl() throws RemoteException {
+		recados = new ArrayList<>();
+	}
+
+	private ArrayList<Recado> recados;
+	
+	@Override
+	public void registrarRecado(Recado recado) throws RemoteException {
+		Recado c = consultarContato(recado.getCodigo());
+		if (c == null)
+			recados.add(recado);
+		else{
+			c.setTexto(recado.getTexto());
+			c.setNome(recado.getNome());
+		}
+	}
+
+	@Override
+	public Recado consultarRecado(int codigo) throws RemoteException {
+		for(Recado r : recados){
+			if (r.getCodigo() == codigo)
+				return r;
+		}
+		return null;
+	}
+
+	@Override
+	public List<Recado> consultarContatos() throws RemoteException {
+		return contatos;
+	}
+} 

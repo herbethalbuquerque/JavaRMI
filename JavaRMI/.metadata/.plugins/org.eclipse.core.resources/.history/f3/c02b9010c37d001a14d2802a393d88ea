@@ -1,0 +1,40 @@
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AgendaImpl extends UnicastRemoteObject implements IMural
+{
+	private static final long serialVersionUID = 1L;
+
+	public AgendaImpl() throws RemoteException {
+		contatos = new ArrayList<>();
+	}
+
+	private ArrayList<Recado> contatos;
+	
+	@Override
+	public void registrarContato(Recado contato) throws RemoteException {
+		Recado c = consultarContato(contato.getCodigo());
+		if (c == null)
+			contatos.add(contato);
+		else{
+			c.setFone(contato.getFone());
+			c.setNome(contato.getNome());
+		}
+	}
+
+	@Override
+	public Recado consultarContato(int codigo) throws RemoteException {
+		for(Recado c : contatos){
+			if (c.getCodigo() == codigo)
+				return c;
+		}
+		return null;
+	}
+
+	@Override
+	public List<Recado> consultarContatos() throws RemoteException {
+		return contatos;
+	}
+} 
